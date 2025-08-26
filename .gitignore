@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# venv
+venv/
+.env/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+
+# Databases / migrations
+*.db
+*.sqlite3
+alembic/
+
+# Logs
+*.log
