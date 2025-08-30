@@ -56,3 +56,13 @@ def get_user_post(
         raise HTTPException(status_code=404, detail="No posts found")
 
     return posts
+
+
+@router.delete('/delete_post')
+def delete_post(title: str, db: Session = Depends(get_db), user_data: dict = Depends(get_current_user)):
+    post = db.query(Post).filter(Post.title == title, Post.user_id == user_data["id"]).first()
+    if not post:
+        return {"message": "Post not found"}
+    db.delete(post)
+    db.commit()
+    return {"message": "Post deleted successfully"}

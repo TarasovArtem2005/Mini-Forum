@@ -29,3 +29,12 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
         return {"username": username, "role": role, "id": id}
     except JWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
+
+
+
+def set_permission(role: str):
+    def permission_checker(user_data: dict = Depends(get_current_user)):
+        if user_data['role'] == role:
+            return
+        raise HTTPException(status_code=403, detail="Forbidden")
+    return permission_checker

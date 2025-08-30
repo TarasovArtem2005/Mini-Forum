@@ -22,3 +22,12 @@ class Post(Base):
     user_id = Column(Integer, ForeignKey("users.id"))
 
     author = relationship("User", back_populates="posts")
+
+
+
+class Comment(Base):
+    __tablename__ = "comments"
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    post_id = Column(Integer, ForeignKey("posts.id"))
+    author_id = Column(Integer, ForeignKey("users.id"))
+    content = Column(String)
